@@ -1,0 +1,79 @@
+{{!-- <form>
+  <div align="center">
+    <div class="form-group">
+      <label for="inputAdress">Address</label>
+      <input type="text" class="form-control" id="inputAdress" placeholder="Insert Adress">
+      <small id="weatherHelp" class="form-text text-muted">We'll search temperature for you.</small>
+      <button id="enterWeather" type="submit" class="btn btn-primary">Enter</button>
+    </div>
+  </div>
+</form>
+<div>
+  <p id="showAdress"></p>
+</div> --}}
+<div align="right">
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link active" style="color:black ">
+          <form action='/' method='get'  novalidate>
+            <button id="refresh" type="submit">Refresh</button>
+          </form>
+      </a>
+  </li>
+
+    <li class="nav-item">
+      <a class="nav-link active" href="#" style="color:black ">
+        <button id="logOut">Logout</button>
+      </a>
+    </li>
+<ul>
+
+</div>
+  
+<div style="height: 300px">
+  <form action='/' method='post'  novalidate style="border: 1px dotted rgb(1, 22, 15); margin-left: 200px; margin-right: 200px; position:fixed; width: 380px; right: 350px; top: 70px">
+  {{!-- onsubmit="buttonEnter(event, this)" --}}
+
+    <div class="form-group" align="center" style= "margin-left: 20px; margin-right: 20px;">
+      <label for="inputAdress" style="color: rgb(9, 11, 155)"><b>Insert Your Address</b></label>
+      <input type="text" class="form-control" id="inputAdress" name="inputAdress" placeholder="Insert Adress">
+      <small id="weatherHelp" class="form-text text-muted">Example: 45335 Miami.</small>
+      <button id="enterWeather" type="submit" class="btn btn-primary">Enter</button>
+    {{!-- onclick="buttonEnter(event)" --}}
+    </div>
+  </form>
+</div>
+
+{{#if Address}}
+  <div id=recentSearch align="center;">
+    <div style="border: 3px dotted rgb(1, 22, 15); margin-left: 200px; margin-right: 200px;">
+      <span style= "color: rgba(68, 0, 255, 0.795); position:relative;  top: 0px; left: 190px">
+        <b><h3>Recent search:</h3></b>
+      </span>
+      <p style="border:1px" id="datas">
+      <ul>
+        <li><h6><b>Address:</b> {{Address}}</h6></li>
+        <li><h6> <b>Temperature:</b> {{Temperature}}</h6></li>
+        <li><h6><b>Apparent Temperature:</b> {{ApparentTemperature}}</h6></li>
+        <li><h6><b>Latitude:</b> {{Latitude}}</h6></li>
+        <li><h6><b>Longitude:</b> {{Longitude}}</h6></li>    
+      </ul>
+      </p>
+    </div>
+  </div>
+{{/if}}
+
+{{#if PreviousSearches}}
+  <div style="border: 1px dotted rgb(1, 22, 15); margin-left: 280px; margin-right: 280px; position:fixed; width: 380px; right: -180px; top: 70px">
+    <div>
+      <span style= "color: rgba(68, 0, 255, 0.795); position:relative;  top: 0px; left: 90px" >
+        <h7><b>Previous last 5 searches:</b></h7>
+      </span>
+      <p style="border: 1px dotted black; margin-right: 50px; margin-left: 50px" id=previousSearches>
+        {{#each PreviousSearches}}
+        <ul><li><h8>{{this}}</h8></li></ul>
+        {{/each}}
+      </p>
+    </div>
+  </div>
+{{/if}}
