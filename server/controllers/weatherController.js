@@ -58,12 +58,15 @@ const getTemperatureFromGeocode = async(lat, lng) => {
         const response = await axios.get(weatherUrl);
         // console.log('Datos vale: ', datos);
         const data = response.data.currently;
-        let temperature = data.temperature;
-        let apparentTemperature = data.apparentTemperature;
+        let temperatureFahrenheit = data.temperature;
+        console.log('Temperatura en Fahrenheit es: ', temperatureFahrenheit);
+        let apparentTemperatureFarenheit = data.apparentTemperature;
         // console.log(`It's currently ${temperature}. It feels like ${apparentTemperature}.`);  
+        const {temperature, apparentTemperature} = await temperatureConverter(temperatureFahrenheit, apparentTemperatureFarenheit);
+        
         return {
-             temperature,
-             apparentTemperature,
+            temperature,
+            apparentTemperature,
         }
 
     }catch(e){
@@ -85,6 +88,19 @@ const coords = async(inputAdress) => {
     };
 };
 
+const temperatureConverter = async(temperatureFahrenheit, apparentTemperatureFarenheit) => {
+    let temperature, apparentTemperature, temperatureCelsius, apparentTemperatureCelsius;
+    
+    temperatureCelsius = (temperatureFahrenheit - 32) * 5/9;
+    apparentTemperatureCelsius = (apparentTemperatureFarenheit - 32) * 5/9;
+    temperature = temperatureCelsius.toFixed(2);
+    apparentTemperature = apparentTemperatureCelsius.toFixed(2);
+    // console.log('Temperatura en centrigrados es: ', temperature);
+    return {
+        temperature,
+        apparentTemperature
+    };
+};
 // const coords = async(inputAdress) => {
 //     // const geocodeUrl = await axiosGeocodeUrl(inputAdress);
 //     // const getWeatherUrl = await axiosgetWeatherUrl(geocodeUrl);
